@@ -99,13 +99,13 @@ class Login extends Component {
     var self = this;
     var payload={
       "user":{
-      "userName":this.state.userName,
+      "userName":this.state.username,
       "password":this.state.password,
       "userType":this.state.loginRole
       },
       "accomodation":{
         "userType":this.state.loginRole,
-        "username":this.state.userName
+        "username":this.state.username
       }
       
     }
@@ -115,13 +115,13 @@ class Login extends Component {
       axios.post(apiBaseUrl, payload)
    .then(function (response) {
      console.log(response);
-     if(response.data.code == 200){
+     if(response.status == 200){
        console.log("Login successfull");
        var uploadScreen=[];
-       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole}/>)
+       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data}/>)
        self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
      }
-     else if(response.data.code == 204){
+     else if(response.status == 204){
        console.log("Username password do not match");
        alert(response.data.success)
      }
@@ -137,13 +137,13 @@ class Login extends Component {
     axios.post(apiBaseUrl, payload)
    .then(function (response) {
      console.log(response);
-     if(response.data.code == 200){
+     if(response.status == 200){
        console.log("Login successfull");
        var uploadScreen=[];
-       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole}/>)
+       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data}/>)
        self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
      }
-     else if(response.data.code == 204){
+     else if(response.status == 204){
        console.log("Username password do not match");
        alert(response.data.success)
      }

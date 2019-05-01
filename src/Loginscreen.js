@@ -22,7 +22,7 @@ class Loginscreen extends Component {
        </MuiThemeProvider>
        <MuiThemeProvider>
        <div>
-          <RaisedButton label={"Register as Host"} primary={true} style={style} onClick={(event) => this.handleClick(event,'teacher')}/>
+          <RaisedButton label={"Register as Host"} primary={true} style={style} onClick={(event) => this.handleClick(event,'host')}/>
       </div>
       </MuiThemeProvider>
       </div>
