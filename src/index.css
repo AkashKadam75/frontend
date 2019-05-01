@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.rowC { 
+	display:flex;
+	flex-wrap:wrap;
+}
+.rowC>* { 
+	flex: 1 1 200px;
+}
+
+.center-align{
+	justify-content: left;
+}
