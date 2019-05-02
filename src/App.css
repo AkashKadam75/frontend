@@ -5,3 +5,19 @@
 .blue-background {
   background-color: #5DD4EC;
 }
+
+.table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
+.row { display:table-row; }
+
+.cell {
+  display:table-cell;
+  padding:5px;
+  background-color: gold;
+}
+
+.button {background-color: #4CAF50;} 

@@ -11,6 +11,7 @@
     "material-ui": "^0.20.2",
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.8.6",
+    "react-buttons": "0.0.11",
     "react-dom": "^16.8.6",
     "react-dropzone": "^3.10.0",
     "react-file-tree": "0.0.8",

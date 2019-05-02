@@ -23,6 +23,10 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import RaisedButton from 'material-ui/RaisedButton';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import axios from 'axios';
+import LoginScreen from './Loginscreen';
 import './App.css';
 
 
@@ -39,10 +43,64 @@ class UploadPage extends Component {
     this.setState({currentScreen})
   }
   
-  handleMenuClick(event,page){
-   
+   handleClick(event,acId,username,role){
+    var self = this;
+    if(role == "host"){
+      console.log("acId"+acId);
+    var payload={
+      "user":{
+      "userName":username
+      },
+      "accomodation":{
+        "acId":acId,
+        "username":username
+      }
+      
+    }
+    var apiBaseUrl = "http://localhost:8080/getStudentRequestsAgainstAccomodation";
+    axios.post(apiBaseUrl, payload)
+   .then(function (response) {
+     console.log(response);
+     var uploadScreen =[];
+      uploadScreen.push(<UploadScreen appContext={self.props.appContext} role={self.state.role} data={response.data} username = {self.state.username}/>);
+      self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+    }else{
+      console.log("acId"+acId);
+      console.log("username"+username);
+    var payload={
+      "user":{
+      "userName":username
+      },
+      "accomodation":{
+        "acId":acId,
+        "username":username
+      }
+      
+    }
+    var apiBaseUrl = "http://localhost:8080/requestAccomodationFromHost";
+    axios.post(apiBaseUrl, payload)
+   .then(function (response) {
+     console.log(response);
+     var loginPage =[];
+      loginPage.push(<LoginScreen appContext={self.props.appContext}/>);
+      self.props.appContext.setState({loginPage:loginPage,uploadScreen:[]})
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+    }
+     
+    
   }
   render() {
+    var buttonName = "Request Stay";
+    if(this.props.role == "host"){
+      buttonName = "See pending requests";
+    }
     return (
     <div>
       <GridList cellHeight={180}>
@@ -51,32 +109,46 @@ class UploadPage extends Component {
         </GridListTile>
         {this.props.data.map(tile => (
           <GridListTile key={tile.acId}>
-          <Card className="blue-background">
+          <Card >
             <CardContent>
-            <Typography  color="textSecondary" gutterBottom>
+            <div class="table" >
+            <div   class="row">
+            <Typography  class="cell" color="textSecondary" gutterBottom>
               Name of Host : {tile.username}
             </Typography>
-            <Typography  color="textSecondary" gutterBottom>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
               Start Date : {tile.startDate}
             </Typography>
-            <Typography  color="textSecondary" gutterBottom>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
               End Date : {tile.endDate}
             </Typography>
-            <Typography  color="textSecondary" gutterBottom>
+            </ div>
+            <div  class="row">
+             <Typography  class="cell" color="textSecondary" gutterBottom>
               Room mate preference : {tile.roommatePreference}
             </Typography>
-            <Typography  color="textSecondary" gutterBottom>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
               Number of Rooms : {tile.noOfRooms}
             </Typography>
-            <Typography  color="textSecondary" gutterBottom>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
+              Number of BathRooms : {tile.noOfBathrooms}
+            </Typography>
+            </div>
+            <div  class="row">
+            <Typography  class="cell" color="textSecondary" gutterBottom>
               Address : {tile.address}
             </Typography>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
+              Status : {tile.status}
+            </Typography>
+            <Typography  class="cell" color="textSecondary" gutterBottom>
+              <Button class = "button" onClick={(event) => this.handleClick(event,tile.acId,this.props.username,this.props.role)}>{buttonName}</Button>
+            </Typography>
+            </div>
+            </div>
           </CardContent>
-          <CardActions>
-            <Button size="small">Request Stay</Button>
-          </CardActions>
         </Card>
-            
+         
           </GridListTile>
         ))}
       </GridList>

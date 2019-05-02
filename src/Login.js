@@ -118,7 +118,7 @@ class Login extends Component {
      if(response.status == 200){
        console.log("Login successfull");
        var uploadScreen=[];
-       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data}/>)
+       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data} username = {self.state.username}/>)
        self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
      }
      else if(response.status == 204){
@@ -140,7 +140,7 @@ class Login extends Component {
      if(response.status == 200){
        console.log("Login successfull");
        var uploadScreen=[];
-       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data}/>)
+       uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole} data={response.data} username = {self.state.username}/>)
        self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
      }
      else if(response.status == 204){
