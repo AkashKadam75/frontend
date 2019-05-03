@@ -5,8 +5,6 @@ import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500, red500, greenA200} from 'material-ui/styles/colors';
-import Pastfiles from './Pastfiles';
-import ComplexGrid from './ComplexGrid'
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -31,14 +29,13 @@ import './App.css';
 
 
 
-class UploadScreen extends Component {
+class UsersListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {draweropen: false,currentScreen:[]};
   }
   componentDidMount(){
     var currentScreen=[];
-   // currentScreen.push(<UploadScreen appContext={this.props.appContext} role={this.props.role}/>);
     this.setState({currentScreen})
   }
   
@@ -104,4 +101,4 @@ class UploadScreen extends Component {
   }
 }
 
-export default UploadScreen;
+export default UsersListPage;

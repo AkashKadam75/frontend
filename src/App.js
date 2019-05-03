@@ -5,7 +5,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './App.css';
 import LoginScreen from './Loginscreen';
-import SimpleMap from './SimpleMap';
 class App extends Component {
   constructor(props){
     super(props);

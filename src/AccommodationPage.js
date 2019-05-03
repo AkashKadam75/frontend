@@ -5,9 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500, red500, greenA200} from 'material-ui/styles/colors';
-import UploadScreen from './UploadScreen';
-import Pastfiles from './Pastfiles';
-import ComplexGrid from './ComplexGrid'
+import UsersListPage from './UsersListPage';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -32,7 +30,7 @@ import './App.css';
 
 
 
-class UploadPage extends Component {
+class AccommodationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {draweropen: false,currentScreen:[]};
@@ -62,7 +60,7 @@ class UploadPage extends Component {
    .then(function (response) {
      console.log(response);
      var uploadScreen =[];
-      uploadScreen.push(<UploadScreen appContext={self.props.appContext} role={self.state.role} data={response.data} username = {self.state.username}/>);
+      uploadScreen.push(<UsersListPage appContext={self.props.appContext} role={self.state.role} data={response.data} username = {self.state.username}/>);
       self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
    })
    .catch(function (error) {
@@ -157,4 +155,4 @@ class UploadPage extends Component {
   }
 }
 
-export default (UploadPage);
+export default (AccommodationPage);
